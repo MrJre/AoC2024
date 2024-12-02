@@ -1,23 +1,23 @@
 import Foundation
 import Testing
-@testable import Day1
+@testable import Day2
 
-struct Day1PuzzleTests {
+struct Day2PuzzleTests {
 
     @Test func part1() throws {
-        let file = file(forDay: 1)
+        let file = file(forDay: 2)
         let input = InputParser(input: file).parse()
 
-        let result = Day1(input: input).part1()
-        #expect(result == 3569916)
+        let result = Day2(input: input).part1()
+        #expect(result == 663)
     }
     
     @Test func part2() throws {
-        let file = file(forDay: 1)
+        let file = file(forDay: 2)
         let input = InputParser(input: file).parse()
 
-        let result = Day1(input: input).part2()
-        #expect(result == 26407426)
+        let result = Day2(input: input).part2()
+        #expect(result == 692)
     }
 
     private func file(forDay day: Int) -> String {

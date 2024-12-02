@@ -10,7 +10,7 @@ struct Day1: Puzzle {
         let listB = input.1.sorted()
 
         return zip(listA, listB)
-            .map { max($0, $1) - min($0, $1) }
+            .map { abs($0.distance(to: $1)) }
             .reduce(0, +)
     }
 

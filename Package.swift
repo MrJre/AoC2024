@@ -8,6 +8,10 @@ let package = Package(
     platforms: [.macOS(.v15)],
     products: [
         .library(
+            name: "Day2",
+            targets: ["Day2"]
+        ),
+        .library(
             name: "Day1",
             targets: ["Day1"]
         ),
@@ -17,6 +21,21 @@ let package = Package(
         ),
     ],
     targets: [
+        .target(
+            name: "Day2",
+            dependencies: [
+                "PuzzleCore"
+            ],
+            resources: [
+                .process("Resources/")
+            ]
+        ),
+        .testTarget(
+            name: "Day2Tests",
+            dependencies: [
+                "Day2"
+            ]
+        ),
         .target(
             name: "Day1",
             dependencies: [
