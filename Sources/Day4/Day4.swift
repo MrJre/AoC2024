@@ -1,5 +1,6 @@
 import Foundation
 import PuzzleCore
+import ToolBox
 
 struct Day4: Puzzle {
 
