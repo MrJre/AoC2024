@@ -18,7 +18,7 @@ struct Day6: Puzzle {
     func part2() -> Int {
         let path = findPathNodes(in: input)
 
-        var nodes = input.nodes
+        let nodes = input.nodes
         let startNode = nodes.first { $0.char == "^" }!
         let obstacles = path.filter { !($0.x == startNode.x && $0.y == startNode.y) }
 
@@ -49,12 +49,10 @@ struct Day6: Puzzle {
         while(current != nil) {
             guard let node = current else { fatalError() }
             let visitedNode = Node(x: node.x, y: node.y, char: direction.char())
+            if visited.contains(visitedNode) { return [] } else { visited.insert(visitedNode) }
             nodes[visitedNode.y * input.width + visitedNode.x] = visitedNode
 
-            if visited.contains(visitedNode) { return [] } else { visited.insert(visitedNode) }
-
             guard let next = neighbour(of: visitedNode, direction: direction, grid: grid) else { break }
-
             switch next.char {
             case "#", "O":
                 current = neighbour(of: visitedNode, direction: direction.rotatedRight(), grid: grid)

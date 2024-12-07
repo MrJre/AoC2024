@@ -8,6 +8,10 @@ let package = Package(
     platforms: [.macOS(.v15)],
     products: [
         .library(
+            name: "Day7",
+            targets: ["Day7"]
+        ),
+        .library(
             name: "Day6",
             targets: ["Day6"]
         ),
@@ -36,7 +40,26 @@ let package = Package(
             targets: ["PuzzleCore"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-algorithms", from: "1.2.0"),
+    ],
     targets: [
+        .target(
+            name: "Day7",
+            dependencies: [
+                "PuzzleCore",
+                .product(name: "Algorithms", package: "swift-algorithms"),
+            ],
+            resources: [
+                .process("Resources/")
+            ]
+        ),
+        .testTarget(
+            name: "Day7Tests",
+            dependencies: [
+                "Day7"
+            ]
+        ),
         .target(
             name: "Day6",
             dependencies: [
