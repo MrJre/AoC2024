@@ -19,8 +19,17 @@ public struct Grid {
     }
 
     public func nodeAt(x: Int, y: Int) -> Node? {
-        guard 0..<width ~= x, 0..<height ~= y else { return nil }
+        guard contains(point: Point(x: x, y: y)) else { return nil }
         return nodes[y * width + x]
+    }
+
+    public func nodeAt(point p: Point) -> Node? {
+        guard contains(point: p) else { return nil }
+        return nodes[p.y * width + p.x]
+    }
+
+    public func contains(point p: Point) -> Bool {
+        0..<width ~= p.x && 0..<height ~= p.y
     }
 }
 
@@ -36,24 +45,5 @@ extension Grid: CustomStringConvertible {
         }
         return result
     }
-}
-
-
-public struct Node {
-    public let x: Int
-    public let y: Int
-    public let char: String
-
-    public init(x: Int, y: Int, char: String) {
-        self.x = x
-        self.y = y
-        self.char = char
-    }
-}
-
-extension Node: Equatable {}
-extension Node: Hashable {}
-extension Node: CustomStringConvertible {
-    public var description: String { "[\(char) - (\(x),\(y))]"}
 }
 
