@@ -5,7 +5,7 @@ public struct Node {
     public let y: Int
     public let char: String
 
-    public var point: Point { Point(x: x, y: y) }
+    public var point: Vec { Vec(x: x, y: y) }
 
     public init(x: Int, y: Int, char: String) {
         self.x = x

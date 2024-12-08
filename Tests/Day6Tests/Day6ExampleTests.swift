@@ -43,4 +43,24 @@ struct Day6ExampleTests {
 
         #expect(result == 6)
     }
+
+    @Test func example2Part2() {
+        let input = """
+        ....#.....
+        .........#
+        ..........
+        ..#.......
+        .......#..
+        ..........
+        .#..^.....
+        ........#.
+        #.........
+        ......#...
+        """
+
+        let parseResult = InputParser(input: input).parse()
+        let result = Day6(input: parseResult).part2()
+
+        #expect(result == 6)
+    }
 }

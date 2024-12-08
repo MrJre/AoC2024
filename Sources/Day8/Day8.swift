@@ -8,7 +8,7 @@ struct Day8: Puzzle {
     let input: Grid
 
     func part1() -> Int {
-        var set = Set<Point>()
+        var set = Set<Vec>()
         let nodes = input.nodes.filter { $0.char != "." }
         let grouped = nodes.grouped { $0.char }
 
@@ -31,7 +31,7 @@ struct Day8: Puzzle {
     }
 
     func part2() -> Int {
-        var set = Set<Point>()
+        var set = Set<Vec>()
         let nodes = input.nodes.filter { $0.char != "." }
         let grouped = nodes.grouped { $0.char }
 

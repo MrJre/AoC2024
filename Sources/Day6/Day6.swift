@@ -12,15 +12,15 @@ struct Day6: Puzzle {
 
     func part1() -> Int {
         let nodes = findPathNodes(in: input)
-        return nodes.count
+        return nodes.filter { ["W", "E", "S", "N"].contains($0.char) }.count
     }
 
     func part2() -> Int {
         let path = findPathNodes(in: input)
 
         let nodes = input.nodes
-        let startNode = nodes.first { $0.char == "^" }!
-        let obstacles = path.filter { !($0.x == startNode.x && $0.y == startNode.y) }
+        let startNode = nodes.first { $0.char == "^" }!.point
+        let obstacles = path.filter { $0.point != startNode }
 
         var loops = 0
 
@@ -36,7 +36,7 @@ struct Day6: Puzzle {
     }
 
     func neighbour(of current: Node, direction: Direction, grid: Grid) -> Node? {
-        grid.nodeAt(x: current.x - direction.vector().x, y: current.y - direction.vector().y)
+        grid.nodeAt(point: current.point - direction.vec)
     }
 
     func findPathNodes(in grid: Grid) -> [Node] {
@@ -48,21 +48,21 @@ struct Day6: Puzzle {
 
         while(current != nil) {
             guard let node = current else { fatalError() }
-            let visitedNode = Node(x: node.x, y: node.y, char: direction.char())
-            if visited.contains(visitedNode) { return [] } else { visited.insert(visitedNode) }
+            let visitedNode = Node(x: node.x, y: node.y, char: direction.char)
             nodes[visitedNode.y * input.width + visitedNode.x] = visitedNode
+            if visited.contains(visitedNode) { return [] } else { visited.insert(visitedNode) }
 
-            guard let next = neighbour(of: visitedNode, direction: direction, grid: grid) else { break }
+            guard let next = neighbour(of: visitedNode, direction: direction, grid: grid) else { return nodes }
             switch next.char {
             case "#", "O":
-                current = neighbour(of: visitedNode, direction: direction.rotatedRight(), grid: grid)
                 direction = direction.rotatedRight()
+                current = Node(x: node.x, y: node.y, char: direction.char)
             default:
                 current = next
             }
         }
 
-        return nodes.filter { ["W", "E", "S", "N"].contains($0.char) }
+        return nodes
     }
 }
 
@@ -72,12 +72,12 @@ enum Direction {
     case south
     case west
 
-    func vector() -> (x: Int, y: Int) {
+    var vec: Vec {
         switch self {
-        case .north: (0, 1)
-        case .east: (-1, 0)
-        case .south: (0, -1)
-        case .west: (1, 0)
+        case .north: Vec(x: 0, y: 1)
+        case .east: Vec(x: -1, y: 0)
+        case .south: Vec(x: 0, y: -1)
+        case .west: Vec(x: 1, y: 0)
         }
     }
 
@@ -90,7 +90,7 @@ enum Direction {
         }
     }
 
-    func char() -> String {
+    var char: String {
         switch self {
         case .north: "N"
         case .east: "E"
