@@ -1,14 +1,10 @@
 import Foundation
 import PuzzleCore
-import ToolBox
+import PuzzleToolBox
 
 struct Day6: Puzzle {
 
     let input: Grid
-
-    init(input: Grid) {
-        self.input = input
-    }
 
     func part1() -> Int {
         let nodes = findPathNodes(in: input)
@@ -63,39 +59,5 @@ struct Day6: Puzzle {
         }
 
         return nodes
-    }
-}
-
-enum Direction {
-    case north
-    case east
-    case south
-    case west
-
-    var vec: Vec {
-        switch self {
-        case .north: Vec(x: 0, y: 1)
-        case .east: Vec(x: -1, y: 0)
-        case .south: Vec(x: 0, y: -1)
-        case .west: Vec(x: 1, y: 0)
-        }
-    }
-
-    func rotatedRight() -> Direction {
-        switch self {
-        case .north: .east
-        case .east: .south
-        case .south: .west
-        case .west: .north
-        }
-    }
-
-    var char: String {
-        switch self {
-        case .north: "N"
-        case .east: "E"
-        case .south: "S"
-        case .west: "W"
-        }
     }
 }

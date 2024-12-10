@@ -1,6 +1,6 @@
 import Foundation
 import PuzzleCore
-import ToolBox
+import PuzzleToolBox
 import Algorithms
 
 struct Day8: Puzzle {

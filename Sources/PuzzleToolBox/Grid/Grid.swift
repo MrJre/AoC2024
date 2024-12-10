@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  AoC2024
-//
-//  Created by Jerry Tromp on 06/12/2024.
-//
-
 import Foundation
 
 public struct Grid {
@@ -46,4 +39,3 @@ extension Grid: CustomStringConvertible {
         return result
     }
 }
-

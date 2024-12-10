@@ -1,5 +1,5 @@
 import Foundation
-import ToolBox
+import PuzzleToolBox
 
 struct InputParser {
     let input: String
